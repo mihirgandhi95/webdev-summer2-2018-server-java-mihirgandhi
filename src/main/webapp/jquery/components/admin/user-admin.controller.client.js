@@ -1,19 +1,78 @@
-
+//IIFE
 (function () {
-    var $usernameFld, $passwordFld;
-    var $removeBtn, $editBtn, $createBtn;
-    var $firstNameFld, $lastNameFld;
-    var $userRowTemplate, $tbody;
-    var userService = new AdminUserServiceClient();
-    $(main);
 
-    function main() { … }
-    function createUser() { … }
-    function findAllUsers() { … }
-    function findUserById() { … }
-    function deleteUser() { … }
-    function selectUser() { … }
-    function updateUser() { … }
-    function renderUser(user) { … }
-    function renderUsers(users) { … }
+    jQuery(main);
+
+    var tbody;
+    var template;
+    var userService = new UserServiceClient()
+
+    function main() {
+        tbody = $('tbody');
+        template = $('.template');
+        $('#createUser').click(createUser);
+
+        findAllUsers();
+    }
+
+    function findAllUsers() {
+        userService
+            .findAllUsers()
+            .then(renderUsers);
+    }
+
+    function createUser() {
+        console.log('createUser');
+
+        var username = $('#usernameFld').val();
+        var password = $('#passwordFld').val();
+        var firstName = $('#firstNameFld').val();
+        var lastName = $('#lastNameFld').val();
+
+        var user = {
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName
+        };
+
+        userService
+            .createUser(user)
+            .then(findAllUsers);
+    }
+
+    function renderUsers(users) {
+        tbody.empty();
+        for(var i=0; i<users.length; i++) {
+            var user = users[i];
+            var clone = template.clone();
+
+            clone.attr('id', user.id);
+
+            clone.find('.delete').click(deleteUser);
+            clone.find('.edit').click(editUser);
+
+            clone.find('.username')
+                .html(user.username);
+            tbody.append(clone);
+        }
+    }
+
+    function deleteUser(event) {
+        var deleteBtn = $(event.currentTarget);
+        var userId = deleteBtn
+            .parent()
+            .parent()
+            .attr('id');
+
+        userService
+            .deleteUser(userId)
+            .then(findAllUsers);
+    }
+
+    function editUser(event) {
+        console.log('editUser');
+        console.log(event);
+    }
+
 })();

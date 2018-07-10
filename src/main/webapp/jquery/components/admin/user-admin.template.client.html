@@ -23,6 +23,7 @@
                 <th>Last Name</th>
                 <th>Role</th>
                 <th>Phone</th>
+                <th>Email</th>
                 <th>Date of Birth</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
@@ -45,6 +46,8 @@
                 </select></td>
                 <td><input id="phoneFld" class="form-control"
                            placeholder="Phone"/></td>
+                <td><input id="emailFld" class="form-control"
+                           placeholder="Email"/></td>
                 <td><input id="dateOfBirthFld" class="form-control"
                            placeholder="MM/DD/YYYY"/></td>
                 <td><button id="button1" class="btn btn-success btn-xs">Create</button></td>
@@ -53,15 +56,16 @@
             </tr>
             </thead>
 
-            <tbody class="wbdv-tbody">
-            <tr class="wbdv-template wbdv-user wbdv-hidden">
-                <td class="wbdv-username">ada</td>
-                <td>&nbsp;</td>
-                <td class="wbdv-first-name">Ada</td>
-                <td class="wbdv-last-name">Lovelace</td>
-                <td class="wbdv-role">FACULTY</td>
-                <td class="wbdv-phone">8575443636</td>
-                <td class="wbdv-dateOfBirth">09/09/2009</td>
+            <tbody class="tablebody">
+            <tr class="template">
+                <td class="username">ada</td>
+                <td class="password">*****</td>
+                <td class="firstName">Ada</td>
+                <td class="lastName">Lovelace</td>
+                <td class="role">FACULTY</td>
+                <td class="phone">8575443636</td>
+                <td class="email">ada@gmail.com</td>
+                <td class="dateOfBirth">09/09/2009</td>
                 <td><button id="button3" class="btn btn-primary btn-xs">Edit</button></td>
                 <td><button id="button4" class="btn btn-danger btn-xs">Delete</button></td>
 
@@ -73,4 +77,5 @@
     </div>
 
 </body>
+
 </html>

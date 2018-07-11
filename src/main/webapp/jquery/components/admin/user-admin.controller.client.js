@@ -78,6 +78,11 @@
 
 
 
+    function editUser(event)
+    {
+        console.log('editUser');
+        console.log(event);
+    }
 
 
     //render the users on the screen
@@ -93,7 +98,6 @@
               var user = users[i];
               var clone = template.clone();
               clone.attr('id', user.id);
-              clone.find('.delete').click(deleteUser);
               clone.find('.edit').click(editUser);
               clone.find('.username').html(user.username);
               clone.find('.password').html(user.password);
@@ -162,7 +166,7 @@
         user.password = $('#passwordFld').val();
         user.role = $('#roleFld').val();
         user.email = $('#emailFld').val();
-        user.phone = $('#phoenFld').val();
+        user.phone = $('#phoneFld').val();
         user.dateOfBirth = $('#dateOfBirthFld').val();
         userService.updateUser(user, user.id, findAllUsers);
         alert('updated user');

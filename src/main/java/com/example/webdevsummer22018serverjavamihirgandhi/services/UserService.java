@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webdevsummer22018serverjavamihirgandhi.models.User;
@@ -34,7 +35,7 @@ public class UserService {
 		currentSession = session;
 		System.out.println(userObj);
 		userObj = userRepository.save(userObj);
-		currentSession.setAttribute("id", userObj);
+		session.setAttribute("id", userObj);
 		return userObj;
 	}
 
@@ -88,6 +89,52 @@ public class UserService {
 		return res;
 		
 	}
+	
+	@PostMapping("/api/login")
+	public User login(@RequestBody User user,HttpSession session)
+	{
+		currentSession = session;
+		List<User> userList = userRepository.findUserByUsernameAndPassword(user.getUsername(),user.getPassword());
+		if(userList.size()== 0)
+		{
+			user = new User();
+			
+		}
+		else 
+		{
+			user = userList.get(0);
+			currentSession.setAttribute("id", user);
+			session.setAttribute("id", user);
+			
+		}
+		return user;
+	}
+	
+	@RequestMapping(value = "/api/logout")
+		public User logout (@RequestBody User user)
+		{
+				currentSession.invalidate();
+				return new User();
+		}
+	
+	@PutMapping("/api/profile")
+	public User updateProfile(@RequestBody User user, HttpSession session){
+		User newUser = (User) currentSession.getAttribute("id");
+		int idUser = newUser.getId() ;
+		user.setId(idUser);
+		userRepository.save(user);
+		return user;
+	}
+	
+	@GetMapping("/api/getProfile")
+	public User getProfile(HttpSession session) {
+		User newUser;
+		System.out.println("inside get profile!!");
+		newUser =  (User) currentSession.getAttribute("id");
+		System.out.println(newUser.getFirstName());
+		return newUser;
+	}
+	
 	
 	
 	

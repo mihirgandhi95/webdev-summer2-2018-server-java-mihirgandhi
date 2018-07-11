@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="profile.style.client.css" rel="stylesheet"/>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="../../services/user.service.client.js"></script>
+    <script src="profile.controller.client.js"></script>
+</head>
+
+
+
+<body>
+<div class="container-fluid"></div>
+<h1>Profile Page</h1>
+</div>
+
+
+<div>
+    <label for="username">
+        Username
+    </label>
+    <input type="text"
+           placeholder="username"
+           id="username"
+           class="form-control"/>
+</div>
+
+<br/>
+
+<div>
+    <label for="password">
+        Password
+    </label>
+    <input type="password"
+           placeholder="password"
+           class="form-control"
+           id="password"/>
+</div>
+
+<br/>
+
+<div>
+    <label for="email">
+        Email Id
+    </label>
+    <input type="text"
+           placeholder="Email"
+           id="email"
+           class="form-control"/>
+</div>
+
+<br/>
+
+<div>
+    <label for="firstName">
+        First Name
+    </label>
+    <input type="text"
+           placeholder="firstname"
+           class="form-control"
+           id="firstName"/>
+</div>
+
+<br/>
+
+<div>
+    <label for="lastName">
+        Last Name
+    </label>
+    <input type="text"
+           placeholder="Lastname"
+           id="lastName"
+           class="form-control"/>
+</div>
+
+<br/>
+
+<div>
+    <label for="phone">
+        Phone
+    </label>
+    <input type="text"
+           placeholder="phone"
+           class="form-control"
+           id="phone"/>
+</div>
+
+<br/>
+
+
+<div>
+    <label for="role">
+        Role
+    </label>
+    <select id="role"
+            type="text"
+           placeholder="Role"
+           class="form-control">
+        <option value ="FACULTY">Faculty </option>
+        <option value ="STUDENT">Student</option>
+        <option value ="STUDENT">Admin </option>
+    </select>
+
+</div>
+
+<br/>
+
+<div>
+    <label for="dateOfBirth">
+        DateOfBirth
+    </label>
+    <input type="text"
+           placeholder="MM/DD/YYYY"
+           class="form-control"
+           id="dateOfBirth"/>
+</div>
+
+<br/>
+
+
+
+<button  id="ProfileUpdtBtn" class="btn btn-success">
+    Update Profile
+</button>
+
+
+
+
+<button  id = "logoutBtn"  class ="btn btn-warning">
+    Log out
+</button>
+
+<br/>
+
+
+<br/>
+
+
+</body>
+</html>
+
+

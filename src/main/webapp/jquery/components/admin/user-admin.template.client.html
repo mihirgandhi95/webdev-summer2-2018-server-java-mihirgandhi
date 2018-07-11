@@ -6,15 +6,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link href="user-admin.style.client.css" rel="stylesheet"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../services/user.service.client.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="../../services/user.service.client.js"></script>
     <script src="user-admin.controller.client.js"></script>
+
 </head>
 <body>
     <div class="container">
         <h1 align= "center" id = "pageName">User Admin Page</h1>
 
-        <table class="table">
+        <table class="tablemain">
             <thead>
             <tr>
                 <th>Username</th>
@@ -31,32 +35,25 @@
 
 
             <tr class="wbdv-form">
-                <td><input id="usernameFld" class="form-control"
-                           placeholder="Username"/></td>
-                <td><input id="passwordFld" class="form-control"
-                           placeholder="Password"/></td>
-                <td><input id="firstNameFld" class="form-control"
-                           placeholder="First Name"/></td>
-                <td><input id="lastNameFld" class="form-control"
-                           placeholder="Last Name"/></td>
-                <td><select id="roleFld" class="form-control">
+                <th><input id="usernameFld" class="form-control" placeholder="Username"/></th>
+                <th><input id="passwordFld" class="form-control" placeholder="Password"/></th>
+                <th><input id="firstNameFld" class="form-control" placeholder="First Name"/></th>
+                <th><input id="lastNameFld" class="form-control" placeholder="Last Name"/></th>
+                <th><select id="roleFld" class="form-control">
                     <option value="FACULTY">Faculty</option>
                     <option value="STUDENT">Student</option>
                     <option value="ADMIN">Admin</option>
-                </select></td>
-                <td><input id="phoneFld" class="form-control"
-                           placeholder="Phone"/></td>
-                <td><input id="emailFld" class="form-control"
-                           placeholder="Email"/></td>
-                <td><input id="dateOfBirthFld" class="form-control"
-                           placeholder="MM/DD/YYYY"/></td>
-                <td><button id="button1" class="btn btn-success btn-xs">Create</button></td>
-                <td><button id="button2" class="btn btn-primary btn-xs">Update</button></td>
+                </select></th>
+                <th><input id="phoneFld" class="form-control" placeholder="Phone"/></th>
+                <th><input id="emailFld" class="form-control" placeholder="Email"/></th>
+                <th><input id="dateOfBirthFld" class="form-control" placeholder="MM/DD/YYYY"/></th>
+                <th><button id="createUser" class="btn btn-success btn-xs">Create</button></th>
+                <th><button id="updateUser" class="btn btn-primary btn-xs">Update</button></th>
 
             </tr>
             </thead>
 
-            <tbody class="tablebody">
+            <tbody class=tbody">
             <tr class="template">
                 <td class="username">ada</td>
                 <td class="password">*****</td>
@@ -66,10 +63,11 @@
                 <td class="phone">8575443636</td>
                 <td class="email">ada@gmail.com</td>
                 <td class="dateOfBirth">09/09/2009</td>
-                <td><button id="button3" class="btn btn-primary btn-xs">Edit</button></td>
-                <td><button id="button4" class="btn btn-danger btn-xs">Delete</button></td>
-
+                <td><button id="editUser" class="edit btn btn-primary btn-xs">Edit</button></td>
+                <td><button id="deleteUser" class="delete btn btn-danger btn-xs">Delete</button></td>
             </tr>
+
+
             </tbody>
         </table>
 

@@ -40,21 +40,20 @@ public class UserService {
 	
 	
 	@GetMapping("/api/user/{userId}")
-	public Optional<User> findUserById(int userId) {
+	public Optional<User> findUserById(@PathVariable ("userId") int userId)
+	{
 		return userRepository.findById(userId);
 	}
 	
-	@PutMapping("/api/user/{userId}")
-	public User updateUser(@PathVariable("userId") int userId, @RequestBody User newUser) {
-		newUser.setId(userId);
-		userRepository.save(newUser);
-		return newUser;
-	}
 	
-	@DeleteMapping("/api/user/{userId}")
-	public void deleteUser(@PathVariable("userId") int id) {
-		userRepository.deleteById(id);
+	@PutMapping("/api/user/{userId}")
+	public User updateUser(@PathVariable ("userId") int userId, @RequestBody User user)
+	{	
+		user.setId(userId);
+		userRepository.save(user);
+		return user;
+		
 	}
-
 	
 }
+

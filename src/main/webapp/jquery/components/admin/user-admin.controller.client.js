@@ -1,100 +1,128 @@
-//IIFE
 (function () {
 
-    var tbody;
-    var template;
-    var userService = new UserServiceClient();
     var username;
     var password;
     var firstName;
     var lastName;
-    var email;
-    var role;
-    var phone;
-    var dateOfBirth;
-    var userId;
+    var userService  = new UserServiceClient();
 
 
-    $(document).ready(main);
+    var template;
+    var tbody;
+    this.url = '/api/user';
+    var self = this;
 
 
-    function main() {
+    jQuery(main);
+
+    function main(){
         findAllUsers();
-        $('#button2').hide();
         tbody = $('tbody');
         template = $('.template');
-        $('#button1').click(createUser);
-        $(document).on('click','#button3',function(){findUserById(this);});
+
+        $('#createUser').click(createUser);
+
+        var tr1 = template.clone();
+        tbody.append(tr1);
+        $(document).on('click','#editUser',function(){getUserByEvent(this);});
     }
 
 
 
-    function findAllUsers() {
-        userService
-            .findAllUsers()
-            .then(renderUsers);
-    }
 
+
+
+
+    //creation of user
     function createUser() {
         console.log('createUser');
 
-        var username = $('#usernameFld').val();
-        var password = $('#passwordFld').val();
-        var firstName = $('#firstNameFld').val();
-        var lastName = $('#lastNameFld').val();
-        var role = $('#roleFld').val();
-        var phone = $('#phoneFld').val();
-        var email = $('#emailFld').val();
-        var dateOfBirth = $('#dateOfBirthFld').val();
+        username = $('#usernameFld').val();
+        password = $('#passwordFld').val();
+        firstName = $('#firstNameFld').val();
+        lastName = $('#lastNameFld').val();
+        role = $("#roleFld").val();
+        phone = $("#phoneFld").val();
+        email = $("#emailFld").val();
+        dateOfBirth = $("#dateOfBirthFld").val();
 
+        var user = {
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            role: role,
+            phone: phone,
+            email:email,
+            dateOfBirth:dateOfBirth
 
-        var newUserObj  = new User(username,password,firstName,lastName,role,phone, email,dateOfBirth);
+        };
 
-        userService
-            .createUser(newUserObj, findAllUsers());
-        alert('created user!')
-        $('#usernameFld').val('');
-        $('#passwordFld').val('');
-        $('#firstNameFld').val('');
-        $('#lastNameFld').val('');
-        $('#roleFld').val('');
-        $('#phoneFld').val('');
-        $('#emailFld').val('');
-        $('#dateOfBirthFld').val('');
-
-    }
-
-    function renderUsers(users) {
-        tbody.empty();
-        for(var i=0; i<users.length; i++) {
-            var user = users[i];
-            var clone = template.clone();
-            clone.attr('id', user.id);
-            clone.find('.delete').click(deleteUser);
-            clone.find('.edit').click(editUser);
-            clone.find('.username')
-                .html(user.username);
-            clone.find('.password').html(user.password);
-            clone.find('.firstName').html(user.firstName);
-            clone.find('.lastName').html(user.lastName);
-            clone.find('.role').html(user.role);
-            clone.find('.phone').html(user.phone);
-            clone.find('.email').html(user.email);
-            clone.find('.dateOfBirth').html(dateOfBirth);
-            tbody.append(clone);
-        }
-    }
-
-
-    function findUserById(userId){
-
-        userService
-            .findUserById(userId)
-            .then(renderUser);
+         fetch(self.url, {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
     }
 
 
 
+
+
+
+
+
+    //render the users on the screen
+    function renderUsers(users)
+    {
+      for(var i =0 ; i<users.length; i++)
+      {
+         // tbody = $('tbody');
+         // template = $('.template');
+          var user=users[i];
+          console.log(user);
+          tbody.empty();
+          for(var i=0; i<users.length; i++) {
+              var user = users[i];
+              var clone = template.clone();
+              clone.attr('id', user.id);
+             // clone.find('.delete').click(deleteUser);
+             // clone.find('.edit').click(editUser);
+              clone.find('.username').html(user.username);
+              clone.find('.password').html(user.password);
+              clone.find('.firstName').html(user.firstName);
+              clone.find('.lastName').html(user.lastName);
+              clone.find('.role').html(user.role);
+              clone.find('.phone').html(user.phone);
+              clone.find('.email').html(user.email);
+              clone.find('.dateOfBirth').html(user.dateOfBirth);
+              tbody.append(clone);
+          }
+      }
+    }
+
+
+
+
+    //find all the users
+    function findAllUsers(){
+        userService.findAllUsers().then(renderUsers);
+
+    }
+
+
+
+    //get user from event like mouseclick
+    function getUserByEvent(event)
+    {
+        var userId = $(event).closest('tr').attr('id');
+        userService.findUserById(userId).then(renderUser);
+    }
+
+
+    //render a single user
     function renderUser(user){
         $('#usernameFld').val(user.username);
         $('#passwordFld').val(user.password);
@@ -104,24 +132,34 @@
         $('#phoneFld').val(user.phone);
         $('#emailFld').val(user.email);
         $('#dateOfBirthFld').val(user.dateOfBirth);
-        $('#button1').hide();
-        $('#button2').show();
+        $('#createUser').hide();
+        $('#updateUser').show();
         alert("Click on update to complete making changes");
-        $(document).on('click','#button2',function(){updateUser(user);});
-
+        $(document).on('click','#updateUser',function(){updateUser(user);});
     }
 
 
+
+
+    //find users by their id
+    function findUserById(userId){
+        userService
+            .findUserById(userId)
+            .then(renderUser);
+    }
+
+
+    //update the data of the users
     function updateUser(user){
-        user.firstName = $('#firstNameFld').val('');
-        user.lastName = $('#lastNameFld').val('');
-        user.username = $('#usernameFld').val('');
-        user.password = $('#passwordFld').val('');
-        user.role = $('#roleFld').val('');
-        user.email = $('#emailFld').val('');
-        user.phone = $('#phoenFld').val('');
-        user.dateOfBirth = $('#dateOfBirthFld').val('');
-        userService.updateUser(user, user.id, findAllUsers());
+        user.firstName = $('#firstNameFld').val();
+        user.lastName = $('#lastNameFld').val();
+        user.username = $('#usernameFld').val();
+        user.password = $('#passwordFld').val();
+        user.role = $('#roleFld').val();
+        user.email = $('#emailFld').val();
+        user.phone = $('#phoenFld').val();
+        user.dateOfBirth = $('#dateOfBirthFld').val();
+        userService.updateUser(user, user.id, findAllUsers);
         alert('updated user');
         $('#firstNameFld').val('');
         $('#lastNameFld').val('');
@@ -131,30 +169,16 @@
         $('#emailFld').val('');
         $('#phoenFld').val('');
         $('#dateOfBirthFld').val('');
-
+        $('#updateUser').hide();
+        $('#createUser').show();
     }
 
 
 
-    function deleteUser(event) {
-        var deleteBtn = $(event.currentTarget);
-        var userId = deleteBtn
-            .parent()
-            .parent()
-            .attr('id');
-
-        userService
-            .deleteUser(userId,findAllUsers);
-
-        alert('deleted user!');
-
-    }
 
 
 
-    function editUser(event) {
-        console.log('editUser');
-        console.log(event);
-    }
+
+
 
 })();

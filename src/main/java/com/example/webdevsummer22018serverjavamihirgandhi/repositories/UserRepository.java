@@ -12,6 +12,13 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
 	
 	
+	@Query ("Select p from User p where p.username = :username")
+	public List<User> findUserByUserName(@Param("username") String username);
+	
+	
+	@Query("Select p from User p where p.username = :username and p.password= :password")
+	public List<User> findUserByUsernameAndPassword(@Param("username") String username,@Param("password") String password);
+	
 	
 	
 }

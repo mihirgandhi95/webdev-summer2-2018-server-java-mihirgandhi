@@ -77,9 +77,15 @@ public class UserService {
 		String bool;
 		
 		List<User> userList = userRepository.findUserByUserName(username);
-		{
-			return null;
+		if(userList.size()==0) {
+			bool = "false";
 		}
+		else
+		{
+			bool ="true";
+		}
+		res.put("bool",""+bool);
+		return res;
 		
 	}
 	

@@ -59,43 +59,42 @@ $(document).ready(function () {
         };
 
 
-         if(pass2 != password){
+         if(pass2 != pass){
+                 if(pass2 =="")
+                 {
+                     alert("registration failed, password validation field can't be empty");
+                     $("#username").val('');
+                     $("#password").val('');
+                     $("#password2").val('');
 
-         if(pass2 =="")
-         {
-             alert("registration failed, password validation field can't be empty");
-             $("#username").val('');
-             $("#password").val('');
-             $("#password2").val('');
+                 }
 
-         }
+                 else if (pass=""){
+                     alert("registration failed, password field can't be empty");
+                     $("#username").val('');
+                     $("#password").val('');
+                     $("#password2").val('');
+                 }
 
-         else if (pass=""){
-             alert("registration failed, password field can't be empty");
-             $("#username").val('');
-             $("#password").val('');
-             $("#password2").val('');
-         }
-
-         else {
-             alert("registration failed passwords not same");
-             $("#username").val('');
-             $("#password").val('');
-             $("#password2").val('');
-         }
+                 else {
+                     alert("registration failed passwords not same");
+                     $("#username").val('');
+                     $("#password").val('');
+                     $("#password2").val('');
+                 }
 
          }
          else
          {
-             var response = userService.register(user).then(function (results){
+             var response = userService.registerUser(userObj).then(function (results){
                  var res = results;
-                 window.location= "/jQuery/components/profile/profile.template.client.html";
+                 window.location= "/jquery/components/profile/profile.template.client.html";
                  $("#username").val('');
                  $("#password").val('');
                  $("#password2").val('');
 
 
-             })
+             });
          }
 
 

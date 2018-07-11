@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="register.style.client.css" rel="stylesheet"/>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="../services/user.service.client.js"></script>
+    <script src="register.controller.client.js"></script>
+</head>
+
+<body>
+<div class="container-fluid"></div>
+<h1>Registration Page</h1>
+</div>
+
+<div>
+    <label for="username">
+        Username
+    </label>
+    <input type="text"
+           placeholder="username"
+           id="username"
+           class="form-control"/>
+</div>
+
+<br/>
+
+<div>
+    <label for="password">
+        Password
+    </label>
+    <input type="password"
+           placeholder="password"
+           class="form-control"
+           id="password"/>
+</div>
+
+<br/>
+
+<div>
+    <label for="password2">
+        Validate Password
+    </label>
+    <input type="password"
+           placeholder="password"
+           class="form-control"
+           id="password2"/>
+</div>
+
+</br>
+
+
+
+
+<button id ="registerBtn" style="margin:5px;" id="registerBtn">
+    Register
+</button>
+
+
+<button id = "loginBtn" href="../../login.template.client.html">
+    Login
+</button>
+
+
+</body>
+</html>

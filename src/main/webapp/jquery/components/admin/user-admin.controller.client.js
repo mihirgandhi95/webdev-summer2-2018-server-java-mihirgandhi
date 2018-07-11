@@ -85,8 +85,7 @@
     {
       for(var i =0 ; i<users.length; i++)
       {
-         // tbody = $('tbody');
-         // template = $('.template');
+          
           var user=users[i];
           console.log(user);
           tbody.empty();
@@ -94,8 +93,8 @@
               var user = users[i];
               var clone = template.clone();
               clone.attr('id', user.id);
-             // clone.find('.delete').click(deleteUser);
-             // clone.find('.edit').click(editUser);
+              clone.find('.delete').click(deleteUser);
+              clone.find('.edit').click(editUser);
               clone.find('.username').html(user.username);
               clone.find('.password').html(user.password);
               clone.find('.firstName').html(user.firstName);

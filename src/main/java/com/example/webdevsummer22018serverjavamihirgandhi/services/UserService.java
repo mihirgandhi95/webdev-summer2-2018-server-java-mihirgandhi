@@ -1,7 +1,11 @@
 package com.example.webdevsummer22018serverjavamihirgandhi.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,10 +26,16 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
+	HttpSession currentSession;
+	
 	@PostMapping("/api/register")
-	public User register(@RequestBody User user)
+	public User register(@RequestBody User userObj, HttpSession session)
 	{
-		return userRepository.save(user);
+		currentSession = session;
+		System.out.println(userObj);
+		userObj = userRepository.save(userObj);
+		currentSession.setAttribute("id", userObj);
+		return userObj;
 	}
 
 	@GetMapping("/api/user")
@@ -59,6 +69,22 @@ public class UserService {
 	public void deleteUser(@PathVariable("userId") int id) {
 		userRepository.deleteById(id);
 	}
+	
+	
+	@GetMapping("/api/register/{username}")
+	public Map<String, String> findUserByUserName(@PathVariable("username") String username) {
+		Map<String, String> res = new HashMap<String, String>();
+		String bool;
+		
+		List<User> userList = userRepository.findUserByUserName(username);
+		{
+			return null;
+		}
+		
+	}
+	
+	
+	
 	
 }
 

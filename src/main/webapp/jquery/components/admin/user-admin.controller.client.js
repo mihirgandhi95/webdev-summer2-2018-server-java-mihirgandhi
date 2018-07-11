@@ -19,12 +19,12 @@
         findAllUsers();
         tbody = $('tbody');
         template = $('.template');
-
         $('#createUser').click(createUser);
-
         var tr1 = template.clone();
         tbody.append(tr1);
         $(document).on('click','#editUser',function(){getUserByEvent(this);});
+        $(document).on('click', "#deleteUser", deleteUser);
+
     }
 
 
@@ -58,13 +58,19 @@
 
         };
 
-         fetch(self.url, {
-            method: 'post',
-            body: JSON.stringify(user),
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
+        //call the userService
+        userService
+            .createUser(user,findAllUsers);
+
+        alert('created user!')
+        $('#usernameFld').val('');
+        $('#passwordFld').val('');
+        $('#firstNameFld').val('');
+        $('#lastNameFld').val('');
+        $('#roleFld').val('');
+        $('#phoneFld').val('');
+        $('#emailFld').val('');
+        $('#dateOfBirthFld').val('');
     }
 
 
@@ -173,6 +179,16 @@
         $('#createUser').show();
     }
 
+
+    //delete the user
+    function deleteUser(event)
+    {
+        var deleteEvent = $(event.currentTarget);
+        var userId= deleteEvent.parent().parent().attr('id');
+        userService.deleteUser(userId,findAllUsers);
+        alert('deleted the user! ');
+
+    }
 
 
 

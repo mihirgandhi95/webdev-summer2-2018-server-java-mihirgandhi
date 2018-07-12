@@ -7,6 +7,11 @@ $(document).ready(function(){
 
     function main(){
 
+        $(document).on('click','#forgotPassword',function() {
+            window.location.replace("../../../forgot.template.client.html");
+        });
+
+
         $(document).on('click',"#login-button", function()
         {
             var username = $("#login-username").val();

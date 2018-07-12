@@ -20,18 +20,18 @@ $(document).ready(function () {
         if(userName == "")
         {
             $('#registerBtn').attr('disabled',true);
-            alert("Registration failed!");
+            alert("Registration failed! username is empty");
 
         }
 
         else {
             var response = userService.findUserByUserName(userName).then(function(results){
             var res = results;
-            if(res.exists == 'true')
+            if(res.bool == 'true')
 
             {
                 $('#registerBtn').attr('disabled',true);
-                alert('registration faiiled');
+                alert('registration failed username already exists ');
 
             }
             });
@@ -83,6 +83,13 @@ $(document).ready(function () {
                      $("#password2").val('');
                  }
 
+         }
+         else if(pass2==pass&& pass=="")
+         {
+             alert("registration failed both password fields cannot be empty");
+             $("#username").val('');
+             $("#password").val('');
+             $("#password2").val('');
          }
          else
          {

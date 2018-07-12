@@ -16,7 +16,7 @@ function UserServiceClient() {
     this.url4 = '/api/logout';
 
     var self = this;
-    this.url = 'http://localhost:8080/api/user';
+    this.url = '/api/user';
 
 
     function findAllUsers() {

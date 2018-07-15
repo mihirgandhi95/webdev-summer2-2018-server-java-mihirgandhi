@@ -11,6 +11,9 @@ $(document).ready(function () {
     {
         $("#username").blur(findUserByUserName);
         $(document).on('click','#registerBtn', function () {registerUser();});
+        $(document).on('click',"#loginBtn",function() {
+            window.location= "../components/login/login.template.client.html"
+        });
     }
 
     function findUserByUserName(){

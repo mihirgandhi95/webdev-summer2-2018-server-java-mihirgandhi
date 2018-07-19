@@ -63,7 +63,6 @@ public class UserService {
 		user.setId(userId);
 		userRepository.save(user);
 		return user;
-		
 	}
 	
 	@DeleteMapping("/api/user/{userId}")

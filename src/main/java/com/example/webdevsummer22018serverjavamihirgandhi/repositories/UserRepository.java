@@ -20,5 +20,4 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	public List<User> findUserByUsernameAndPassword(@Param("username") String username,@Param("password") String password);
 	
 	
-	
 }

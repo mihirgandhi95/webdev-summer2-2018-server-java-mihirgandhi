@@ -1,5 +1,11 @@
 package com.example.webdevsummer22018serverjavamihirgandhi.services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webdevsummer22018serverjavamihirgandhi.models.Course;
+import com.example.webdevsummer22018serverjavamihirgandhi.models.Module;
 import com.example.webdevsummer22018serverjavamihirgandhi.models.User;
 import com.example.webdevsummer22018serverjavamihirgandhi.repositories.CourseRepository;
 
@@ -38,11 +45,43 @@ public class CourseServices {
 	}
 	
 	@PutMapping("/api/course/{courseId}")
-	public Course editCourse(@PathVariable ("courseId") int courseId, @RequestBody Course course)
+	public void editCourse(@PathVariable ("courseId") int courseId, @RequestBody String courseTitle)
 	{	
-		course.setId(courseId);
-		courseRepository.save(course);
-		return course;
+		System.out.println("************************************"+courseTitle);
+		Optional<Course> course = courseRepository.findById(courseId); 
+		
+		if(course.isPresent())
+		{
+			Course updatedCourse = course.get();
+			
+			updatedCourse.setTitle(courseTitle);
+			courseRepository.save(updatedCourse);
+			
+		}
+	}
+	
+	@GetMapping("/api/course/{courseTitle}")
+	public List<Course> findCourseByTitle(@PathVariable("courseTitle") String courseTitle) {
+		//Map<String, String> res = new HashMap<String, String>();
+		String bool;
+		
+		List<Course> courseList = courseRepository.findCourseByTitle(courseTitle);
+		if(courseList.size()==0) {
+			bool = "false";
+		}
+		else
+		{
+			bool ="true";
+		}
+		if(bool == "true") {
+			return courseList;
+		}
+		else {
+		return new ArrayList<Course>();	
+		}
+		//res.put("bool",""+bool);
+		//return res;
+		
 	}
 	
 	

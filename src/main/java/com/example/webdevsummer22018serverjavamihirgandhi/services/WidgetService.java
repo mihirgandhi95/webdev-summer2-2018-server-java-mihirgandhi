@@ -66,6 +66,22 @@ public class WidgetService {
 			@PathVariable("topicId") int topicId) {
 		
 		//return widgetRepository.findAllWidgetsForTopic(topicId);
+//		Optional<Topic> data = topicRepository.findById(topicId);
+//		if(data.isPresent()) {
+//			Topic topic = data.get();
+//			return topic.getWidgets();
+//		}
+//		return new ArrayList<Widget>();		
+		
+		return widgetRepository.findAllWidgetsForTopic(topicId);
+	}
+	
+	
+	@GetMapping("/api/topic/{topicId}/widget")
+	public List<Widget> findWidgetsForTopic(
+			@PathVariable("topicId") int topicId) {
+		
+		//return widgetRepository.findAllWidgetsForTopic(topicId);
 		Optional<Topic> data = topicRepository.findById(topicId);
 		if(data.isPresent()) {
 			Topic topic = data.get();
@@ -73,7 +89,6 @@ public class WidgetService {
 		}
 		return new ArrayList<Widget>();		
 	}
-	
 	
 	@GetMapping("/api/widget")
 	public List<Widget> findAllWidgets(){
@@ -99,10 +114,10 @@ public class WidgetService {
 		return widget;
 	}
 	
-	@GetMapping("/api/widget/{widgetId}")
-	public void getWidgetById(@PathVariable ("widgetId") int id) {
-		widgetRepository.findById(id);
-	}
+//	@GetMapping("/api/widget/{widgetId}")
+//	public void getWidgetById(@PathVariable ("widgetId") int id) {
+//		widgetRepository.findById(id);
+//	}
 	
 	@DeleteMapping("/api/widget/{widgetId}")
 	public void deleteWidget(@PathVariable ("widgetId") int id) {

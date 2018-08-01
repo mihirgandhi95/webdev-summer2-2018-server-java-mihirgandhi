@@ -58,6 +58,18 @@ public class TopicService {
 	}
 	
 	
+	@GetMapping("/api/lesson/{lessonId}/topic")
+	public List<Topic> findTopicsForLesson(
+			@PathVariable("lessonId") int lessonId) {
+		Optional<Lesson> data = lessonRepository.findById(lessonId);
+		if(data.isPresent()) {
+			Lesson lesson = data.get();
+			return lesson.getTopics();
+		}
+		return new ArrayList<Topic>();		
+	}
+	
+	
 	@PutMapping("/api/course/{courseId}/module/{moduleId}/lesson/{lessonId}/topic/{topicId}")
 	public Topic editTopic(@PathVariable ("courseId") int courseId,@PathVariable ("moduleId") int moduleId,@PathVariable ("lessonId") int lessonId,@PathVariable ("topicId") int topicId,@RequestBody Topic topic)
 	{	

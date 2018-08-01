@@ -11,6 +11,7 @@ import com.example.webdevsummer22018serverjavamihirgandhi.models.Widget;
 
 public interface WidgetRepository extends CrudRepository<Widget, Integer> {
 	
-	
+	@Query(value = "select * from widget where topic_id=?1 order by widget_order", nativeQuery = true)
+	public List<Widget> findAllWidgetsForTopic(@Param("topicId") int topicId);
 	
 }

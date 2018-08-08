@@ -42,8 +42,7 @@ public class Widget {
 	private String size;
 	
 	
-	
-	
+		
 	public String getWidgetOrder() {
 		return widgetOrder;
 	}

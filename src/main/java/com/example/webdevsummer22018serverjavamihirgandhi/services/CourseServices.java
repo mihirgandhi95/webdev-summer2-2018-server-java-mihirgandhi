@@ -33,6 +33,12 @@ public class CourseServices {
 	public Iterable<Course> findAllCourses() {
 		return courseRepository.findAll(); 
 	}
+	
+	
+	@GetMapping("/api/section/course/{courseId}")
+	public Optional<Course> findCourseById(@PathVariable("courseId") int id) {
+		return courseRepository.findById(id);
+	}
 
 	@PostMapping("/api/course")
 	public Course createCourse(@RequestBody Course course) {
@@ -59,6 +65,22 @@ public class CourseServices {
 			
 		}
 	}
+	
+	
+//	
+//	@GetMapping("/api/course/{courseId}")
+//	public Course findCourseById(@PathVariable ("courseId") int courseId) {
+//		Optional<Course> course = courseRepository.findById(courseId);
+//		
+//		if(course.isPresent())
+//		{
+//			return course;
+//		}
+//		else
+//		{
+//			return new Course()
+//		}
+//	}
 	
 	@GetMapping("/api/course/{courseTitle}")
 	public List<Course> findCourseByTitle(@PathVariable("courseTitle") String courseTitle) {
